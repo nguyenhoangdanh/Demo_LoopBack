@@ -1,0 +1,49 @@
+name: CI
+ 
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+      name: Build and Test
+      timeout-minutes: 10
+      runs-on: ubuntu-latest
+      # use Turborepo Remote Caching for optimizing workflow
+      env:
+       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+       VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+
+      steps:
+        - name: Check out code
+          uses: actions/checkout@v3
+          with:
+            fetch-depth: 2
+ 
+        - name: Setup Node.js environment
+          uses: actions/setup-node@v3
+          with:
+            node-version: 18
+            cache: 'yarn'
+ 
+        - name: Install dependencies
+          run: yarn
+ 
+        - name: Build
+          run: yarn build
+
+        - name: Prepare and zip build directory
+          run: |
+            mkdir -p build
+            cp -r apps/hrm-admin/dist build/admin_dist
+            cp -r apps/hrm-server/dist build/server_dist
+            zip -r build.zip build
+          if: github.ref == 'refs/heads/main'
+
+        - name: Upload build directory
+          uses: actions/upload-artifact@v3
+          with:
+            name: build-artifact
+            path: build.zip
+          if: github.ref == 'refs/heads/main'

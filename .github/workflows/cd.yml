@@ -1,0 +1,76 @@
+name: CD
+
+concurrency: production
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  deploy:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - server: 1
+            instances: 1
+          - server: 2
+            instances: 2
+
+    steps:
+      - name: Download workflow artifact
+        uses: dawidd6/action-download-artifact@v2.27.0
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: ci.yml
+          name: build-artifact
+          path: build
+
+      - name: scp file via ssh
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets[format('IP_MT_DEVS_{0}', matrix.server)] }}
+          username: ${{ secrets.SERVER_DEPLOYMENT_IDENTIFIER }}
+          password: ${{ secrets.SERVER_DEPLOYMENT_CREDENTIAL }}
+          source: "build/build.zip"
+          target: /opt/docker/mt_hrm
+
+      - name: Deploy server ${{ matrix.server }}
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets[format('IP_MT_DEVS_{0}', matrix.server)] }}
+          username: ${{ secrets.SERVER_DEPLOYMENT_IDENTIFIER }}
+          password: ${{ secrets.SERVER_DEPLOYMENT_CREDENTIAL }}
+          script_stop: true
+          script: |
+            echo "Pulling latest source code..."
+            cd /opt/docker/mt_hrm
+            git checkout -f main
+            git fetch origin
+            git reset --hard origin/main
+
+            echo "Unzip the build"
+            unzip build/build.zip
+
+            echo "Clear the current build"
+            rm -rf apps/hrm-admin/dist/* apps/hrm-server/dist/*
+
+            echo "Setup the latest version of build"
+            cp -r build/admin_dist/* apps/hrm-admin/dist/
+            cp -r build/server_dist/* apps/hrm-server/dist/
+
+            for i in {1..${{ matrix.instances }}}; do
+              docker restart prod-hrm-server-$i-1
+            done
+
+            echo "Deployment done"
+
+            echo "Clear the build"
+            rm -rf build

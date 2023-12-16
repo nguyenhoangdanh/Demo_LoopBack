@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+  # ----------------------------------------------------------------
+  # SERVER 1
+  # ----------------------------------------------------------------  
+  hrm-server-1:
+    image: node:16
+    working_dir: /hrm-server
+    ports:
+      - ${SERVER_1_PORT}:3000
+    volumes:
+      - /opt/docker/mt_hrm:/hrm-server
+      - /opt/docker/mt_hrm/logs:/hrm-server/logs
+      - /etc/localtime:/etc/localtime:ro
+    command: sh ./start.sh
+    restart: always
+    logging:
+      driver: 'json-file'
+      options:
+        max-file: '5'
+        max-size: '100m'
+
+  # ----------------------------------------------------------------
+  # SERVER 2
+  # ----------------------------------------------------------------  
+  hrm-server-2:
+    image: node:16
+    working_dir: /hrm-server
+    ports:
+      - ${SERVER_2_PORT}:3000
+    volumes:
+      - /opt/docker/mt_hrm:/hrm-server
+      - /opt/docker/mt_hrm/logs:/hrm-server/logs
+      - /etc/localtime:/etc/localtime:ro
+    command: sh ./start.sh
+    restart: always
+    logging:
+      driver: 'json-file'
+      options:
+        max-file: '5'
+        max-size: '100m'

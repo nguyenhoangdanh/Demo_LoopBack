@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  # ----------------------------------------------------------------
+  # ADMIN
+  # ----------------------------------------------------------------
+  nginx:
+    image: bitnami/nginx:1.25.1
+    ports:
+      - 1100:80
+    volumes:
+      - /opt/docker/mt_hrm/apps/hrm-admin/nginx/conf/nginx.conf:/opt/bitnami/nginx/conf/nginx.conf:ro
+      - /opt/docker/mt_hrm/apps/hrm-admin/dist:/app:ro

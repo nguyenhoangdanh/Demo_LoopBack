@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  # ----------------------------------------------------------------
+  # REDIS
+  # ----------------------------------------------------------------  
+  redis_1:
+    image: bitnami/redis:6.2.12
+    container_name: mt_hrm_redis_1
+    ports:
+      - 6300:6379
+    environment:
+      - REDIS_PASSWORD=${APP_ENV_REDIS_PASSWORD}
+    volumes:
+      - /data/mt_hrm/redis_data:/bitnami/redis/data
+      - /opt/docker/mt_hrm/services/redis-cluster_1:/mt_hrm_redis_1_data
+      - /etc/redis.conf:/redis/redis.conf
+      - /etc/localtime:/etc/localtime:ro
+
+  # ----------------------------------------------------------------
+  # REDIS SOCKET
+  # ----------------------------------------------------------------  
+  redis_io:
+    image: bitnami/redis:6.2.12
+    container_name: mt_hrm_redis_io
+    ports:
+      - 6301:6379
+    environment:
+      - REDIS_PASSWORD=${APP_ENV_REDIS_IO_CLUSTER_PASSWORD}

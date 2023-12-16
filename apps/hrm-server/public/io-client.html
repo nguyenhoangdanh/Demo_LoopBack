@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>IO Client Test</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="https://loopback.io/favicon.ico" />
+  </head>
+
+  <body>
+    <h1>IO Client Test</h1>
+    <p>Please check Inspect > Network</p>
+  </body>
+
+  <script type="module">
+    import { io } from 'https://cdn.socket.io/4.4.1/socket.io.esm.min.js';
+
+    const socket = io('http://localhost:3000', {
+      forceJSONP: true,
+      path: '/stream',
+      extraHeaders: {
+        Authorization:
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVMkZzZEdWa1gxOTZXbmJaVnNNaHVzMmV0ZGl3b1Zyc1NkbXpudWl2QXNVPSI6IlUyRnNkR1ZrWDE5STBoaXVlbGE3bkx4Ri9VWUJrTm8vTEdWb2taVjdrSTg9IiwiVTJGc2RHVmtYMTl0TnJ1a1NnZTRXYTMwUmVJeWo2Wm15YkFJc0VTQ2tBTT0iOiJVMkZzZEdWa1gxOEF4N0FCcUkwWGxoaU1MeERmWncrM0h4S1loV3hrVmlFPSIsImlhdCI6MTY4ODQ1OTQ2NiwiZXhwIjoxNjg4NTQ1ODY2fQ.3PEuG6K25w54ymD2X-S19d3p0uDB8NHiPNGUVhu7c9Y',
+      },
+    });
+
+    socket.on('ping', payload => {
+      console.log(payload);
+    });
+
+    socket.on('unauthenticated', payload => {
+      console.log(payload);
+    });
+
+    socket.on('connect', () => {
+      console.log('SOCKET CONNECTED');
+      socket.emit('authenticate');
+    });
+
+    socket.on('authenticated', payload => {
+      console.log('SOCKET AUTHENTICATED');
+      socket.emit('join', {
+        rooms: [
+          'message',
+        ],
+      });
+    });
+
+    socket.on('observation-message', payload => {
+      console.log(payload);
+    });
+
+  </script>
+</html>

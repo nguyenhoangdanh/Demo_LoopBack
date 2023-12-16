@@ -1,0 +1,98 @@
+version: '3.9'
+
+services:
+  # ----------------------------------------------------------------
+  # POSTGRES 0
+  # ----------------------------------------------------------------  
+  hrm-pg-0:
+    image: bitnami/postgresql-repmgr:14
+    ports:
+      - ${PG_0_PORT}:5432
+    volumes:
+      - /data/mt_hrm/pg_0_data:/bitnami/postgresql
+      - /opt/docker/mt_hrm/services/pg_0:/pg_0_data
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - POSTGRESQL_POSTGRES_PASSWORD=${APP_ENV_POSTGRES_POSTGRES_PASSWORD}
+      - POSTGRESQL_USERNAME=${APP_ENV_POSTGRES_USERNAME}
+      - POSTGRESQL_PASSWORD=${APP_ENV_POSTGRES_PASSWORD}
+      - POSTGRESQL_DATABASE=${APP_ENV_POSTGRES_DATABASE}
+      - REPMGR_USERNAME=${APP_ENV_REPMGR_USERNAME}
+      - REPMGR_PASSWORD=${APP_ENV_REPMGR_PASSWORD}
+      - REPMGR_PARTNER_NODES=${PG_0_HOST}:${PG_0_PORT},${PG_1_HOST}:${PG_1_PORT},${PG_2_HOST}:${PG_2_PORT}
+      - REPMGR_NODE_NETWORK_NAME=${PG_0_HOST}
+      - REPMGR_PORT_NUMBER=${PG_0_PORT}
+      - REPMGR_PRIMARY_HOST=${PG_0_HOST}
+      - REPMGR_PRIMARY_PORT=${PG_0_PORT}
+      - REPMGR_NODE_NAME=hrm-pg-0
+
+  # ----------------------------------------------------------------
+  # POSTGRES 1
+  # ----------------------------------------------------------------  
+  hrm-pg-1:
+    image: bitnami/postgresql-repmgr:14
+    ports:
+      - ${PG_1_PORT}:5432
+    volumes:
+      - /data/mt_hrm/pg_1_data:/bitnami/postgresql
+      - /opt/docker/mt_hrm/services/pg_1:/pg_1_data
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - POSTGRESQL_POSTGRES_PASSWORD=${APP_ENV_POSTGRES_POSTGRES_PASSWORD}
+      - POSTGRESQL_USERNAME=${APP_ENV_POSTGRES_USERNAME}
+      - POSTGRESQL_PASSWORD=${APP_ENV_POSTGRES_PASSWORD}
+      - POSTGRESQL_DATABASE=${APP_ENV_POSTGRES_DATABASE}
+      - REPMGR_USERNAME=${APP_ENV_REPMGR_USERNAME}
+      - REPMGR_PASSWORD=${APP_ENV_REPMGR_PASSWORD}
+      - REPMGR_PARTNER_NODES=${PG_0_HOST}:${PG_0_PORT},${PG_1_HOST}:${PG_1_PORT},${PG_2_HOST}:${PG_2_PORT}
+      - REPMGR_NODE_NETWORK_NAME=${PG_1_HOST}
+      - REPMGR_PORT_NUMBER=${PG_1_PORT}
+      - REPMGR_PRIMARY_HOST=${PG_0_HOST}
+      - REPMGR_PRIMARY_PORT=${PG_0_PORT}
+      - REPMGR_NODE_NAME=hrm-pg-1
+
+  # ----------------------------------------------------------------
+  # POSTGRES 2
+  # ----------------------------------------------------------------  
+  hrm-pg-2:
+    image: bitnami/postgresql-repmgr:14
+    ports:
+      - ${PG_2_PORT}:5432
+    volumes:
+      - /data/mt_hrm/pg_2_data:/bitnami/postgresql
+      - /opt/docker/mt_hrm/services/pg_2:/pg_2_data
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - POSTGRESQL_POSTGRES_PASSWORD=${APP_ENV_POSTGRES_POSTGRES_PASSWORD}
+      - POSTGRESQL_USERNAME=${APP_ENV_POSTGRES_USERNAME}
+      - POSTGRESQL_PASSWORD=${APP_ENV_POSTGRES_PASSWORD}
+      - POSTGRESQL_DATABASE=${APP_ENV_POSTGRES_DATABASE}
+      - REPMGR_USERNAME=${APP_ENV_REPMGR_USERNAME}
+      - REPMGR_PASSWORD=${APP_ENV_REPMGR_PASSWORD}
+      - REPMGR_PARTNER_NODES=${PG_0_HOST}:${PG_0_PORT},${PG_1_HOST}:${PG_1_PORT},${PG_2_HOST}:${PG_2_PORT}
+      - REPMGR_NODE_NETWORK_NAME=${PG_2_HOST}
+      - REPMGR_PORT_NUMBER=${PG_2_PORT}
+      - REPMGR_PRIMARY_HOST=${PG_0_HOST}
+      - REPMGR_PRIMARY_PORT=${PG_0_PORT}
+      - REPMGR_NODE_NAME=hrm-pg-2
+
+  # ----------------------------------------------------------------
+  # PGPOOL
+  # ----------------------------------------------------------------  
+  hrm-pgpool:
+    image: bitnami/pgpool:4
+    ports:
+      - 5400:5432
+    environment:
+      - PGPOOL_BACKEND_NODES=0:${PG_0_HOST}:${PG_0_PORT},1:${PG_1_HOST}:${PG_1_PORT},2:${PG_2_HOST}:${PG_2_PORT}
+      - PGPOOL_SR_CHECK_USER=${APP_ENV_REPMGR_USERNAME}
+      - PGPOOL_SR_CHECK_PASSWORD=${APP_ENV_REPMGR_PASSWORD}
+      - PGPOOL_POSTGRES_USERNAME=${APP_ENV_POSTGRES_USERNAME}
+      - PGPOOL_POSTGRES_PASSWORD=${APP_ENV_POSTGRES_PASSWORD}
+      - PGPOOL_ADMIN_USERNAME=${APP_ENV_PGPOOL_ADMIN_USERNAME}
+      - PGPOOL_ADMIN_PASSWORD=${APP_ENV_PGPOOL_ADMIN_PASSWORD}
+    healthcheck:
+      test: ["CMD", "/opt/bitnami/scripts/pgpool/healthcheck.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

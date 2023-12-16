@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 5
+    },
+    "auditLog": ".a15e4deb2ace05eb6a8fca5df82d5e82c0ee2117-audit.json",
+    "files": [
+        {
+            "date": 1701311150351,
+            "name": "PNT-error-20231130_09.log",
+            "hash": "06afe5d1120d6459034fbb17dcc3b1a5618ee432a5b99e4280f0734984a42538"
+        }
+    ],
+    "hashType": "sha256"
+}

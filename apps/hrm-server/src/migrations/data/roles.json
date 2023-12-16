@@ -1,0 +1,32 @@
+[
+  {
+    "identifier": "999-super-admin",
+    "name": "Super Admin",
+    "priority": 999
+  },
+  {
+    "identifier": "998-admin",
+    "name": "Admin",
+    "priority": 998
+  },
+  {
+    "identifier": "997-operator",
+    "name": "Operator",
+    "priority": 997
+  },
+  {
+    "identifier": "996-maintainer",
+    "name": "Maintainer",
+    "priority": 996
+  },
+  {
+    "identifier": "995-manager",
+    "name": "Manager",
+    "priority": 995
+  },
+  {
+    "identifier": "100-employee",
+    "name": "Employee",
+    "priority": 100
+  }
+]

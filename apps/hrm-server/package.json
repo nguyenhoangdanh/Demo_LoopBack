@@ -1,0 +1,114 @@
+{
+  "name": "hrm-server",
+  "version": "0.0.1",
+  "description": "A backend server for mt_hrm project",
+  "keywords": [
+    "loopback-application",
+    "loopback"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "engines": {
+    "node": "16 || 18 || 20"
+  },
+  "scripts": {
+    "build": "lb-tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
+    "build:watch": "lb-tsc -p tsconfig.json && tsc-alias -p tsconfig.json --watch",
+    "lint": "yarn run eslint && yarn run prettier:check",
+    "lint:fix": "yarn run eslint:fix && yarn run prettier:fix",
+    "prettier:cli": "lb-prettier \"**/*.ts\" \"**/*.js\"",
+    "prettier:check": "yarn run prettier:cli -l",
+    "prettier:fix": "yarn run prettier:cli --write",
+    "eslint": "lb-eslint --report-unused-disable-directives .",
+    "eslint:fix": "yarn run eslint --fix",
+    "pretest": "yarn run rebuild",
+    "test": "lb-mocha --allow-console-logs \"dist/__tests__\"",
+    "posttest": "yarn run lint",
+    "test:dev": "lb-mocha --allow-console-logs dist/__tests__/**/*.js && yarn run posttest",
+    "docker:build": "docker build -t hrm-server .",
+    "docker:run": "docker run -p 3000:3000 -d hrm-server",
+    "premigrate": "yarn run build",
+    "migrate:dev": "yarn run rebuild &&  NODE_ENV=development RUN_MODE=migrate dotenv -e ../../.env.development ts-node -r dotenv-flow/config ./dist/migrate",
+    "migrate:prod": "yarn run rebuild && NODE_ENV=production RUN_MODE=migrate ts-node -r dotenv-flow/config ./dist/migrate",
+    "preopenapi-spec": "yarn run build",
+    "openapi-spec": "node ./dist/openapi-spec",
+    "prestart": "yarn run rebuild",
+    "start": "node -r source-map-support/register -r dotenv-flow/config .",
+    "clean": "lb-clean dist *.tsbuildinfo .eslintcache",
+    "rebuild": "yarn run clean && yarn run build",
+    "dev": "DEBUG=loopback:connector:postgresql NODE_ENV=development RUN_MODE=startup nodemon",
+    "prod": "NODE_ENV=production RUN_MODE=startup DEBUG=false node -r source-map-support/register -r dotenv-flow/config ."
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Viet Anh Vo <anhviet5121pc@gmail.com>",
+  "license": "",
+  "files": [
+    "README.md",
+    "dist",
+    "src",
+    "!*/__tests__"
+  ],
+  "dependencies": {
+    "@lb/infra": "https://github.com/phatnt199/lb-infra.git",
+    "@loopback/authorization": "^0.14.1",
+    "@loopback/boot": "^6.1.1",
+    "@loopback/core": "^5.1.1",
+    "@loopback/repository": "^6.1.1",
+    "@loopback/rest": "^13.1.1",
+    "@loopback/rest-explorer": "^6.1.1",
+    "@loopback/service-proxy": "^6.1.1",
+    "@reduxjs/toolkit": "^1.9.2",
+    "@tensorflow/tfjs-node": "^4.11.0",
+    "@types/minio": "^7.1.0",
+    "@vladmandic/face-api": "^1.7.12",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "canvas": "^2.11.2",
+    "dotenv": "^16.0.3",
+    "dotenv-flow": "^3.2.0",
+    "ioredis": "^5.3.2",
+    "jsonwebtoken": "^9.0.0",
+    "loopback-connector-postgresql": "^6.0.4",
+    "loopback-connector-rest": "^4.0.3",
+    "minio": "^7.1.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^2.0.22",
+    "python-shell": "^5.0.0",
+    "redux": "^4.2.1",
+    "redux-saga": "^1.2.1",
+    "socketcluster-client": "^14.3.1",
+    "tslib": "^2.0.0"
+  },
+  "devDependencies": {
+    "@loopback/build": "^10.1.1",
+    "@loopback/eslint-config": "^14.0.0",
+    "@loopback/testlab": "^6.1.1",
+    "@types/cron": "^2.0.1",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/multer": "^1.4.7",
+    "@types/node": "^14.18.47",
+    "@types/node-fetch": "^2.6.5",
+    "@types/socketcluster-client": "^13.0.3",
+    "dotenv-cli": "latest",
+    "eslint": "^8.40.0",
+    "source-map-support": "^0.5.21",
+    "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.6",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "~4.9.5"
+  },
+  "nodemonConfig": {
+    "verbose": true,
+    "watch": [
+      "src/"
+    ],
+    "ignore": [
+      "dist/*"
+    ],
+    "ext": "ts",
+    "exec": "yarn start"
+  }
+}

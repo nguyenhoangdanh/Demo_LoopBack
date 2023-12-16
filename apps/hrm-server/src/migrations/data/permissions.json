@@ -1,0 +1,601 @@
+[
+  {
+    "subject": "attendance",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "findAll",
+        "name": "Permission findAll attendance"
+      },
+      {
+        "method": "findById",
+        "name": "Permission findById attendance"
+      },
+      {
+        "method": "count",
+        "name": "Permission count attendance"
+      },
+      {
+        "method": "create",
+        "name": "Permission create attendance"
+      },
+      {
+        "method": "deleteById",
+        "name": "Permission deleteById attendance"
+      },
+      {
+        "method": "updateAll",
+        "name": "Permission updateAll attendance"
+      },
+      {
+        "method": "updateById",
+        "name": "Permission updateById attendance"
+      },
+      {
+        "method": "replaceById",
+        "name": "Permission replaceById attendance"
+      }
+    ]
+  },
+  {
+    "subject": "authentication",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "signUp",
+        "name": "Permission signUp authentication"
+      },
+      {
+        "method": "changePassword",
+        "name": "Permission changePassword authentication"
+      },
+      {
+        "method": "resetPassword",
+        "name": "Permission resetPassword authentication"
+      }
+    ]
+  },
+  {
+    "subject": "checkin",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "encodeImage",
+        "name": "Permission encodeImage check-in"
+      },
+      {
+        "method": "checkIn",
+        "name": "Permission checkIn check-in"
+      },
+      {
+        "method": "checkOut",
+        "name": "Permission checkOut check-in"
+      }
+    ]
+  },
+  {
+    "subject": "department",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "findAll",
+        "name": "Permission findAll department"
+      },
+      {
+        "method": "findById",
+        "name": "Permission findById department"
+      },
+      {
+        "method": "count",
+        "name": "Permission count department"
+      },
+      {
+        "method": "create",
+        "name": "Permission create department"
+      },
+      {
+        "method": "updateAll",
+        "name": "Permission updateAll department"
+      },
+      {
+        "method": "updateById",
+        "name": "Permission updateById department"
+      },
+      {
+        "method": "replaceById",
+        "name": "Permission replaceById department"
+      },
+      {
+        "method": "deleteById",
+        "name": "Permission deleteById department"
+      }
+    ]
+  },
+  {
+    "subject": "issue",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "findAll",
+        "name": "Permission findAll issue"
+      },
+      {
+        "method": "updateIssue",
+        "name": "Permission updateIssue issue"
+      },
+      {
+        "method": "deleteById",
+        "name": "Permission deleteById issue"
+      },
+      {
+        "method": "create",
+        "name": "Permission create issue"
+      },
+      {
+        "method": "count",
+        "name": "Permission count issue"
+      },
+      {
+        "method": "replaceById",
+        "name": "permission replacebyid issue"
+      },
+      {
+        "method": "findById",
+        "name": "permission findById issue"
+      },
+      {
+        "method": "updateAll",
+        "name": "permission updateAll issue"
+      }
+    ]
+  },
+  {
+    "subject": "issueassignee",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "create",
+        "name": "Permission create issueassignee"
+      },
+      {
+        "method": "delete",
+        "name": "Permission delete issueassignee"
+      },
+      {
+        "method": "patch",
+        "name": "Permission patch issueassignee"
+      }
+    ]
+  },
+  {
+    "subject": "issuetag",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "create",
+        "name": "Permission create issuetag"
+      },
+      {
+        "method": "delete",
+        "name": "Permission delete issuetag"
+      },
+      {
+        "method": "patch",
+        "name": "Permission patch issuetag"
+      }
+    ]
+  },
+  {
+    "subject": "metalink",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "upload",
+        "name": "Permission upload metalink"
+      }
+    ]
+  },
+  {
+    "subject": "notion",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "getPage",
+        "name": "Permission getPage notion"
+      },
+      {
+        "method": "getDatabase",
+        "name": "Permission getDatabase notion"
+      },
+      {
+        "method": "filterDatabaseWithMonth",
+        "name": "Permission filterDatabaseWithMonth notion"
+      },
+      {
+        "method": "createMonthPage",
+        "name": "Permission createMonthPage notion"
+      },
+      {
+        "method": "createAttendanceRecord",
+        "name": "Permission createAttendanceRecord notion"
+      },
+      {
+        "method": "createAttendancePage",
+        "name": "Permission createAttendancePage notion"
+      }
+    ]
+  },
+  {
+    "subject": "authorization",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "upsert",
+        "name": "Permission upsert authorization"
+      },
+      {
+        "method": "find",
+        "name": "Permission find authorization"
+      },
+      {
+        "method": "findById",
+        "name": "Permission findById authorization"
+      },
+      {
+        "method": "count",
+        "name": "Permission count authorization"
+      },
+      {
+        "method": "updateAll",
+        "name": "Permission updateAll authorization"
+      },
+      {
+        "method": "updateById",
+        "name": "Permission updateById authorization"
+      },
+      {
+        "method": "replaceById",
+        "name": "Permission replaceById authorization"
+      },
+      {
+        "method": "deleteById",
+        "name": "Permission deleteById authorization"
+      }
+    ]
+  },
+  {
+    "subject": "permission",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "findAll",
+        "name": "Permission findAll permission"
+      }
+    ]
+  },
+  {
+    "subject": "position",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "findAll",
+        "name": "Permission findAll position"
+      },
+      {
+        "method": "findById",
+        "name": "Permission findById position"
+      },
+      {
+        "method": "count",
+        "name": "Permission count position"
+      },
+      {
+        "method": "create",
+        "name": "Permission create position"
+      },
+      {
+        "method": "updateAll",
+        "name": "Permission updateAll position"
+      },
+      {
+        "method": "updateById",
+        "name": "Permission updateById position"
+      },
+      {
+        "method": "replaceById",
+        "name": "Permission replaceById position"
+      },
+      {
+        "method": "deleteById",
+        "name": "Permission deleteById position"
+      }
+    ]
+  },
+  {
+    "subject": "role",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "findAll",
+        "name": "Permission findAll role"
+      },
+      {
+        "method": "findById",
+        "name": "Permission findById role"
+      },
+      {
+        "method": "count",
+        "name": "Permission count role"
+      },
+      {
+        "method": "create",
+        "name": "Permission create role"
+      },
+      {
+        "method": "updateAll",
+        "name": "Permission updateAll role"
+      },
+      {
+        "method": "updateById",
+        "name": "Permission updateById role"
+      },
+      {
+        "method": "replaceById",
+        "name": "Permission replaceById role"
+      },
+      {
+        "method": "deleteById",
+        "name": "Permission deleteById role"
+      }
+    ]
+  },
+  {
+    "subject": "status",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "find",
+        "name": "Permission find status"
+      },
+      {
+        "method": "findById",
+        "name": "Permission findById status"
+      },
+      {
+        "method": "count",
+        "name": "Permission count status"
+      },
+      {
+        "method": "create",
+        "name": "Permission create status"
+      },
+      {
+        "method": "updateAll",
+        "name": "Permission updateAll status"
+      },
+      {
+        "method": "updateById",
+        "name": "Permission updateById status"
+      },
+      {
+        "method": "replaceById",
+        "name": "Permission replaceById status"
+      },
+      {
+        "method": "deleteById",
+        "name": "Permission deleteById status"
+      }
+    ]
+  },
+  {
+    "subject": "tag",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "find",
+        "name": "Permission find tag"
+      },
+      {
+        "method": "findById",
+        "name": "Permission findById tag"
+      },
+      {
+        "method": "count",
+        "name": "Permission count tag"
+      },
+      {
+        "method": "create",
+        "name": "Permission create tag"
+      },
+      {
+        "method": "updateAll",
+        "name": "Permission updateAll tag"
+      },
+      {
+        "method": "updateById",
+        "name": "Permission updateById tag"
+      },
+      {
+        "method": "replaceById",
+        "name": "Permission replaceById tag"
+      },
+      {
+        "method": "deleteById",
+        "name": "Permission deleteById tag"
+      }
+    ]
+  },
+  {
+    "subject": "type",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "find",
+        "name": "Permission find type"
+      },
+      {
+        "method": "findById",
+        "name": "Permission findById type"
+      },
+      {
+        "method": "count",
+        "name": "Permission count type"
+      },
+      {
+        "method": "create",
+        "name": "Permission create type"
+      },
+      {
+        "method": "updateAll",
+        "name": "Permission updateAll type"
+      },
+      {
+        "method": "updateById",
+        "name": "Permission updateById type"
+      },
+      {
+        "method": "replaceById",
+        "name": "Permission replaceById type"
+      },
+      {
+        "method": "deleteById",
+        "name": "Permission deleteById type"
+      }
+    ]
+  },
+  {
+    "subject": "user",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "findAll",
+        "name": "Permission findAll user"
+      },
+      {
+        "method": "findHigherRoles",
+        "name": "Permission findHigherRoles user"
+      },
+      {
+        "method": "findById",
+        "name": "Permission findById user"
+      },
+      {
+        "method": "count",
+        "name": "Permission count user"
+      },
+      {
+        "method": "create",
+        "name": "Permission create user"
+      },
+      {
+        "method": "updateAll",
+        "name": "Permission updateAll user"
+      },
+      {
+        "method": "updateUser",
+        "name": "Permission updateById user"
+      },
+      {
+        "method": "replaceById",
+        "name": "Permission replaceById user"
+      },
+      {
+        "method": "deleteById",
+        "name": "Permission deleteById user"
+      },
+      {
+        "method": "filterUsersNotInDepartments",
+        "name": "Permission filterUsersNotInDepartments user"
+      }
+    ]
+  },
+  {
+    "subject": "userattendance",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "findByUserId",
+        "name": "Permission findByUserId userattendance"
+      }
+    ]
+  },
+  {
+    "subject": "userdepartment",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "get",
+        "name": "Permission find userdepartment"
+      },
+      {
+        "method": "link",
+        "name": "Permission link userdepartment"
+      },
+      {
+        "method": "unlink",
+        "name": "Permission unlink userdepartment"
+      }
+    ]
+  },
+  {
+    "subject": "userposition",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "get",
+        "name": "Permission find userposition"
+      },
+      {
+        "method": "link",
+        "name": "Permission link userposition"
+      },
+      {
+        "method": "unlink",
+        "name": "Permission unlink userposition"
+      }
+    ]
+  },
+  {
+    "subject": "userprofile",
+    "pType": "p",
+    "action": "execute",
+    "details": [
+      {
+        "method": "find",
+        "name": "Permission find userprofile"
+      },
+      {
+        "method": "create",
+        "name": "Permission create userprofile"
+      },
+      {
+        "method": "patch",
+        "name": "Permission patch userposition"
+      },
+      {
+        "method": "delete",
+        "name": "Permission delete userposition"
+      }
+    ]
+  }
+]
